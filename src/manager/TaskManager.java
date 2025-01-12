@@ -1,212 +1,56 @@
 package manager;
 
-import model.TaskStatus;
-import model.Task;
 import model.Epic;
 import model.SubTask;
+import model.Task;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
 
+public interface TaskManager {
+    int generatorId();
 
-public class TaskManager {
-    private HashMap<Integer, Task> tasks;
-    private final HashMap<Integer, SubTask> subTasks;
-    private final HashMap<Integer, Epic> epics;
-    private int id;
+    ArrayList<Task> getTasks();
 
+    ArrayList<Epic> getEpics();
 
-    public TaskManager() {
-        tasks = new HashMap<>();
-        subTasks = new HashMap<>();
-        epics = new HashMap<>();
-        this.id = 0;
+    ArrayList<SubTask> getSubTasks();
 
+    ArrayList<SubTask> getEpicSubTask(int id) throws NoSuchElementException;
 
-    }
+    Task getTask(int taskId);
 
-    public int generatorId() {
-        return ++id;
-    }
+    SubTask getSubTask(int subtaskId);
 
-    public ArrayList<Task> getTasks() {
-        ArrayList<Task> taskArrayList = new ArrayList<>(tasks.values());
-        return taskArrayList;
-    }
+    Epic getEpic(int epicId);
 
-    public ArrayList<Epic> getEpics() {
-        ArrayList<Epic> epicArrayList = new ArrayList<>(epics.values());
-        return epicArrayList;
-    }
+    Task addNewTask(Task task);
 
-    public ArrayList<SubTask> getSubTasks() {
-        ArrayList<SubTask> subTaskArrayList = new ArrayList<>(subTasks.values());
-        return subTaskArrayList;
-    }
+    Epic addNewEpic(Epic epic);
 
-    public ArrayList<SubTask> getEpicSubTask(int id) throws NoSuchElementException {
-        if (epics.containsKey(id)) {
-            Epic epic = epics.get(id);
-            ArrayList<SubTask> result = new ArrayList<>();
-            for (int i = 0; i < epic.getSubTasks().size(); i++) {
-                result.add(subTasks.get(epic.getSubTasks().get(i)));
+    SubTask addNewSubTask(SubTask subTask);
 
-            }
-            return result;
-        } else {
-            throw new NoSuchElementException("Эпик с данным id отсутствует!!!");
+    void updateEpic(Epic epic);
 
-        }
+    void updateTask(Task task);
 
-    }
+    void updateSubTask(SubTask subTask);
 
-    public Task getTask(int taskId) {
-        return tasks.get(taskId);
-    }
+    void deleteTaskId(int taskId);
 
-    public SubTask getSubTask(int subtaskId) {
-        return subTasks.get(subtaskId);
-    }
+    void deleteSubTaskId(int id);
 
-    public Epic getEpic(int epicId) {
-        return epics.get(epicId);
-    }
+    void deleteEpicId(int id);
 
-    public Task addNewTask(Task task) {
-        if (task != null) {
-            int newId = task.getId();
-            newId = generatorId();
-            task.setId(newId);
-            tasks.put(newId, task);
-        } else {
-            return null;
-        }
-        return task;
+    void deleteTasks();
 
-    }
+    void deleteEpics();
 
-    public Epic addNewEpic(Epic epic) {
-        if (epic != null) {
-            int newId = epic.getId();
-            newId = generatorId();
-            epic.setId(newId);
-            epics.put(newId, epic);
-        } else {
-            return null;
-        }
-        return epic;
-    }
+    void deleteSubTasks();
 
-    public SubTask addNewSubTask(SubTask subTask) {
+    ArrayList<Task> getHistory();
 
-        int subId = subTask.getId();
-        if (subId == 0) {
-            subId = generatorId();
-            subTask.setId(subId);
-
-        }
-
-        Epic epic = epics.get(subTask.getEpicId());
-        if (epic == null) {
-            throw new RuntimeException("Такого эпика нет!!");
-        } else {
-            subTasks.put(subId, subTask);
-            epic.addSubTaskId(subId);
-            updateEpic(epic);
-        }
-
-        return subTask;
-
-    }
-
-
-    public void updateEpic(Epic epic) {
-        ArrayList<SubTask> subTaskArrayList = getEpicSubTask(epic.getId());
-
-        if (epic.getSubTasks().isEmpty()) {
-            epic.setStatus(TaskStatus.NEW);
-            return;
-        }
-        boolean isNew = false;
-        boolean isDone = true;
-
-        for (SubTask subTask : subTaskArrayList) {
-            TaskStatus status = subTask.getStatus();
-            if (status == TaskStatus.NEW) {
-                isNew = true;
-
-            } else if (status != TaskStatus.DONE) {
-                isDone = false;
-
-            }
-
-            if (isNew) {
-                epic.setStatus(TaskStatus.IN_PROGRESS);
-            } else if (isDone) {
-                epic.setStatus(TaskStatus.DONE);
-            } else {
-                epic.setStatus(TaskStatus.NEW);
-            }
-        }
-
-    }
-
-    public void updateTask(Task task) {
-        tasks.put(task.getId(), task);
-    }
-
-    public void updateSubTask(SubTask subTask) {
-        Epic epic = getEpic(subTask.getId());
-        subTasks.put(subTask.getId(), subTask);
-        updateEpic(epic);
-
-    }
-
-    public void deleteTaskId(int taskId) {
-        tasks.remove(taskId);
-    }
-
-    public void deleteSubTaskId(int id) {
-        SubTask subTask = subTasks.remove(id);
-        Epic epic = epics.get(subTask.getEpicId());
-        epic.getSubTasks().remove(id);
-        updateEpic(epic);
-
-    }
-
-    public void deleteEpicId(int id) {
-        Epic epic = epics.get(id);
-        for (Integer subtaskId : epic.getSubTasks()) {
-            subTasks.remove(subtaskId);
-        }
-        epics.remove(id);
-
-    }
-
-    public void deleteTasks() {
-        tasks.clear();
-    }
-
-    public void deleteEpics() {
-        epics.clear();
-        subTasks.clear();
-    }
-
-    public void deleteSubTasks() {
-        ArrayList<Integer> subTaskIdRemove = new ArrayList<>(subTasks.keySet());
-
-        for (Integer subTaskId : subTaskIdRemove) {
-            SubTask subTask = subTasks.get(subTaskId);
-            Epic epic = epics.get(subTask.getEpicId());
-            epic.removeSubTask(subTaskId);
-            updateEpic(epic);
-
-
-            subTasks.remove(subTaskId);
-        }
-
-    }
 
 
 }
-
-
