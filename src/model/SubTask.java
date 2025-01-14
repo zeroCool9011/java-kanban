@@ -43,6 +43,7 @@ protected int epicId;
                 ", Описание задачи ='" + description + '\'' +
                 ", Номер задачи =" + id +
                 ", Статус=" + status +
+                ", Эпик ИД=" + epicId +
                 '}';
     }
 }
