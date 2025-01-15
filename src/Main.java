@@ -39,12 +39,12 @@ public class Main {
 
 
 
-       // manager.deleteEpicId(4);
+       manager.deleteEpicId(4);
 //        System.out.println(manager.getTasks());
 //        System.out.println("");
 //        System.out.println(manager.getEpics());
 //        System.out.println("");
-       // manager.deleteSubTasks();
+        manager.deleteSubTasks();
         Task task = manager.getTask(1);
         manager.getEpic(4);
         manager.getSubTask(6);

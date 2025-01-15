@@ -8,6 +8,6 @@ import java.util.List;
 public interface HistoryManager {
     void addHistory(Task task);
 
-    public ArrayList<Task> getHistory();
+    ArrayList<Task> getHistory();
 
 }
