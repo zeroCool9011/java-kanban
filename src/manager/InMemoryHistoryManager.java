@@ -1,11 +1,8 @@
 package manager;
 
 import model.Task;
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class InMemoryHistoryManager implements HistoryManager {
