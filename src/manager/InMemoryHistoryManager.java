@@ -58,7 +58,7 @@ public class InMemoryHistoryManager implements HistoryManager {
             removeNode(node);
         }
         linkedLast(task);
-        nodeMap.put(task.getId(),tail);
+        nodeMap.put(task.getId(), tail);
     }
 
     public void remove(int id) {

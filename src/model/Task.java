@@ -15,6 +15,7 @@ public class Task {
         this.id = id;
         this.status = status;
     }
+
     public Task(String name, String description, TaskStatus status) {
         this.name = name;
         this.description = description;
@@ -44,6 +45,7 @@ public class Task {
     public void setStatus(TaskStatus status) {
         this.status = status;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -56,7 +58,7 @@ public class Task {
     public boolean equals(Object object) {
         if (object == null || getClass() != object.getClass()) return false;
         Task task = (Task) object;
-        return id == task.id ;
+        return id == task.id;
     }
 
     @Override
@@ -73,7 +75,6 @@ public class Task {
                 ", Статус=" + status +
                 '}';
     }
-
 
 
 }

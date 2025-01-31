@@ -3,17 +3,16 @@ package model;
 import java.util.Objects;
 
 public class SubTask extends Task {
-protected int epicId;
+    protected int epicId;
 
 
+    public SubTask(int id, String name, String description, TaskStatus status, int epicId) {
+        super(id, name, description, status);
+        this.epicId = 0;
 
-        public SubTask (int id, String name, String description, TaskStatus status, int epicId){
-            super(id, name, description, status);
-            this.epicId = 0;
+    }
 
-        }
-
-    public SubTask (String name, String description, TaskStatus status, int epicId){
+    public SubTask(String name, String description, TaskStatus status, int epicId) {
         super(name, description, status);
         this.epicId = epicId;
 
@@ -21,7 +20,7 @@ protected int epicId;
 
     public int getEpicId() {
 
-            return epicId;
+        return epicId;
     }
 
     @Override
@@ -36,6 +35,7 @@ protected int epicId;
     public int hashCode() {
         return Objects.hash(super.hashCode(), epicId);
     }
+
     @Override
     public String toString() {
         return "model.SubTask{" +
