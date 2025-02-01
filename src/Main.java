@@ -36,7 +36,7 @@ public class Main {
         manager.deleteEpicId(3);
 
 
-        // manager.deleteEpicId(4);
+        //manager.deleteEpicId(4);
 //        System.out.println(manager.getTasks());
 //        System.out.println("");
 //        System.out.println(manager.getEpics());
