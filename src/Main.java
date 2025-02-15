@@ -1,5 +1,4 @@
 import manager.FileBackedTaskManager;
-import manager.HistoryManager;
 import manager.Managers;
 import manager.TaskManager;
 import model.TaskStatus;
@@ -49,7 +48,7 @@ public class  Main {
 //        final HistoryManager historyManager = Managers.getDefaultHistory();
 
 
-      //  manager.deleteEpicId(3);
+        //  manager.deleteEpicId(3);
 
 
         //manager.deleteEpicId(4);
@@ -73,19 +72,19 @@ public class  Main {
         // System.out.println(manager.getSubTask(6));
         // subTask.setStatus(model.TaskStatus.IN_PROGRESS);
         //manager.updateSubTask(subTask);
-       // manager.getEpic(3);
+        // manager.getEpic(3);
         // manager.deleteSubTasks();
 //        manager.deleteEpics();
 //        manager.printAllSubTasks();
 //        System.out.println(manager.getEpics());
 //
 //
-       // final Task task7 = manager.getTask(2);
+        // final Task task7 = manager.getTask(2);
 
-       // SubTask subTask21 = manager.getSubTask(7);
+        // SubTask subTask21 = manager.getSubTask(7);
 //
-       // manager.getSubTask(5);
-     // manager.getEpic(4);
+        // manager.getSubTask(5);
+        // manager.getEpic(4);
 //        //SubTask subTask10 = manager.getSubTask(5);
 //        manager.getSubTasks();
 //
