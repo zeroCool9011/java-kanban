@@ -1,5 +1,7 @@
 package model;
 
+import manager.TasksType;
+
 import java.util.Objects;
 
 
@@ -22,6 +24,8 @@ public class Task {
         this.status = status;
     }
 
+
+
     public String getName() {
         return name + " " + description;
     }
@@ -32,6 +36,10 @@ public class Task {
 
     public int getId() {
         return id;
+    }
+
+    public TasksType getType() {
+        return TasksType.TASK;
     }
 
     public void setId(int id) {
@@ -68,12 +76,8 @@ public class Task {
 
     @Override
     public String toString() {
-        return "model.Task{" +
-                "Имя задачи ='" + name + '\'' +
-                ", Описание задачи ='" + description + '\'' +
-                ", Номер задачи =" + id +
-                ", Статус=" + status +
-                '}';
+        return id + "," + getType() + "," + name + "," + status + ","
+                + description;
     }
 
 
