@@ -20,7 +20,6 @@ public class  Main {
 
         TaskManager manager = Managers.getDefault();
 
-
         System.out.println(fileBackedTaskManager1.getTasks());
         System.out.println(fileBackedTaskManager1.getEpics());
 
@@ -43,71 +42,6 @@ public class  Main {
         final int subTaskId1 = manager.addNewSubTask(subTask1).getId();
         final int subTaskId2 = manager.addNewSubTask(subTask2).getId();
         final int subTaskId3 = manager.addNewSubTask(subTask3).getId();
-//
-//
-//        final HistoryManager historyManager = Managers.getDefaultHistory();
-
-
-        //  manager.deleteEpicId(3);
-
-
-        //manager.deleteEpicId(4);
-//        System.out.println(manager.getTasks());
-//        System.out.println("");
-//        System.out.println(manager.getEpics());
-//        System.out.println("");
-        //manager.deleteSubTasks();
-//        Task task = manager.getTask(1);
-//        Task task3 = manager.getTask(1);
-//        manager.getEpic(4);
-//        manager.getSubTask(5);
-
-//        Task task3 = manager.getTask(1);
-//        Task task4 = manager.getTask(2);
-//        Task task5 = manager.getTask(2);
-//        Task task6 = manager.getTask(1);
-
-
-        //SubTask subTask = manager.getSubTask(1);
-        // System.out.println(manager.getSubTask(6));
-        // subTask.setStatus(model.TaskStatus.IN_PROGRESS);
-        //manager.updateSubTask(subTask);
-        // manager.getEpic(3);
-        // manager.deleteSubTasks();
-//        manager.deleteEpics();
-//        manager.printAllSubTasks();
-//        System.out.println(manager.getEpics());
-//
-//
-        // final Task task7 = manager.getTask(2);
-
-        // SubTask subTask21 = manager.getSubTask(7);
-//
-        // manager.getSubTask(5);
-        // manager.getEpic(4);
-//        //SubTask subTask10 = manager.getSubTask(5);
-//        manager.getSubTasks();
-//
-//        manager.getSubTask(5);
-//
-//        System.out.println(subTask1);
-//        System.out.println("История вызова " + manager.getHistory() + "\n");
-//
-//        task.setStatus(TaskStatus.DONE);
-//        manager.updateTask(task);
-//        System.out.println("CHANGE STATUS: Task2 IN_PROGRESS->DONE");
-//        System.out.println("Sanayw: ");
-//        for (Task t : manager.getTasks()) {
-//            System.out.println(t);
-//        }
-//
-//    }
-
-//    public static void printAllTask(TaskManager manager) {
-//        manager.getTasks();
-//        manager.getEpics();
-//        manager.getSubTasks();
-//    }
 
     }
 }

@@ -1,5 +1,6 @@
 package manager;
 
+import exceptions.ManagerSaveException;
 import model.Epic;
 import model.SubTask;
 import model.Task;
@@ -9,7 +10,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 
-public class FileBackedTaskManager extends InMemoryTaskManager implements TaskManager {
+public class FileBackedTaskManager extends InMemoryTaskManager {
 
     private final File file;
 
@@ -81,7 +82,6 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
 
     private static Task fromString(String value) {
         String[] linesTask = value.split(",", 6);
-        try {
             Integer id = Integer.parseInt(linesTask[0]);
             String name = linesTask[2];
             TasksType tasksType = TasksType.valueOf(linesTask[1]);
@@ -103,15 +103,9 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
                     return new SubTask(id, name, description, status, Integer.valueOf(epicIdString));
 
                 default:
-                    throw new IllegalArgumentException("Неизвестный тип задачи: " + tasksType);
+                    throw new RuntimeException("Ошибка: Неподдерживаемый тип задачи." );
             }
-        } catch (NumberFormatException e) {
-            throw new RuntimeException("Ошибка формата в строке: " + value, e);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new RuntimeException("Ошибка: строка имеет недостаточное количество полей: " + value, e);
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Ошибка: " + e.getMessage(), e);
-        }
+
     }
 
     @Override
@@ -122,51 +116,10 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
     }
 
     @Override
-    public ArrayList<Task> getTasks() {
-        save();
-        return super.getTasks();
-
-    }
-
-    @Override
-    public ArrayList<Epic> getEpics() {
-        save();
-        return super.getEpics();
-
-    }
-
-    @Override
-    public ArrayList<SubTask> getSubTasks() {
-        save();
-        return super.getSubTasks();
-
-    }
-
-    @Override
     public ArrayList<SubTask> getEpicSubTask(int id) {
         save();
         return super.getEpicSubTask(id);
 
-    }
-
-    @Override
-    public Task getTask(int taskId) {
-        save();
-        return super.getTask(taskId);
-
-    }
-
-    @Override
-    public SubTask getSubTask(int subtaskId) {
-        save();
-        return super.getSubTask(subtaskId);
-
-    }
-
-    @Override
-    public Epic getEpic(int epicId) {
-        save();
-        return super.getEpic(epicId);
     }
 
     @Override
@@ -247,9 +200,4 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
 
     }
 
-    public ArrayList<Task> getHistory() {
-        save();
-        return super.getHistory();
-
-    }
 }
