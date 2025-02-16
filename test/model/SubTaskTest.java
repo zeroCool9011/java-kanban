@@ -36,7 +36,7 @@ class SubTaskTest {
     @Test
     public void testEqualityById(){
         SubTask sub1 = new SubTask(1,"Тест1", "Тест Теста1",TaskStatus.NEW,1);
-        SubTask sub2 = new SubTask(1,"Тест2", "Тест Теста2",TaskStatus.IN_PROGRESS,2);
+        SubTask sub2 = new SubTask(1,"Тест2", "Тест Теста2",TaskStatus.IN_PROGRESS,1);
         assertEquals(sub1,sub2,"Подзадача не может прикрепиться сама к себе");
 
     }

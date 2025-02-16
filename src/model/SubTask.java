@@ -1,5 +1,7 @@
 package model;
 
+import manager.TasksType;
+
 import java.util.Objects;
 
 public class SubTask extends Task {
@@ -8,7 +10,7 @@ public class SubTask extends Task {
 
     public SubTask(int id, String name, String description, TaskStatus status, int epicId) {
         super(id, name, description, status);
-        this.epicId = 0;
+        this.epicId = epicId;
 
     }
 
@@ -21,6 +23,11 @@ public class SubTask extends Task {
     public int getEpicId() {
 
         return epicId;
+    }
+
+    @Override
+    public TasksType getType() {
+        return TasksType.SUBTASK;
     }
 
     @Override
@@ -38,12 +45,6 @@ public class SubTask extends Task {
 
     @Override
     public String toString() {
-        return "model.SubTask{" +
-                "Имя задачи ='" + name + '\'' +
-                ", Описание задачи ='" + description + '\'' +
-                ", Номер задачи =" + id +
-                ", Статус=" + status +
-                ", Эпик ИД=" + epicId +
-                '}';
+        return id + "," + getType() + "," + name + "," + status + "," + description + "," + epicId;
     }
 }

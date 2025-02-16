@@ -1,5 +1,7 @@
 package model;
 
+import manager.TasksType;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -14,6 +16,10 @@ public class Epic extends Task {
 
     }
 
+    @Override
+    public TasksType getType() {
+        return TasksType.EPIC;
+    }
 
     public Epic(String name, String description) {
         super(name, description, TaskStatus.NEW);
@@ -25,7 +31,7 @@ public class Epic extends Task {
     }
 
     public ArrayList<Integer> getSubTasks() {
-        return subTasks;
+        return new ArrayList<>(subTasks);
 
     }
 
@@ -55,12 +61,7 @@ public class Epic extends Task {
 
     @Override
     public String toString() {
-        return "model.Epic{" +
-                "Имя задачи ='" + name + '\'' +
-                ", Описание задачи ='" + description + '\'' +
-                ", Номер задачи =" + id +
-                ", Статус=" + status +
-                '}';
+        return id + "," + getType() + "," + name + "," + status + "," + description + ",";
     }
 
 }
